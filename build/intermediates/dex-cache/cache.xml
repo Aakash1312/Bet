@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/aakash/Installables/FacebookLoginSample-master-master/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4e86306289ace4aa0cfec44a05ed2b410d36989d">
+        <dex dex="/home/aakash/Installables/FacebookLoginSample-master-master/app/build/intermediates/pre-dexed/debug/classes-4a84fe500c4c5db6ea641dae6fb7debbbd5a835c.jar" />
+    </item>
+    <item
+        jar="/home/aakash/Installables/FacebookLoginSample-master-master/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="d84409890828e07d344a3b9b1da545dba9897b51">
+        <dex dex="/home/aakash/Installables/FacebookLoginSample-master-master/app/build/intermediates/pre-dexed/debug/classes-354bcdadbf8490e6d1543ec0610a2d51c522173d.jar" />
+    </item>
+    <item
+        jar="/root/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.2/f1bc476cc167b18e66c297df599b2377131a8947/gson-2.6.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="f1bc476cc167b18e66c297df599b2377131a8947">
+        <dex dex="/home/aakash/Installables/FacebookLoginSample-master-master/app/build/intermediates/pre-dexed/debug/gson-2.6.2-ac06da6517732f9ef15c77cc395089280e3d4104.jar" />
+    </item>
+    <item
+        jar="/root/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-android/1.1.4/129874135e6081269ace2312092031558865de12/bolts-android-1.1.4.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="129874135e6081269ace2312092031558865de12">
+        <dex dex="/home/aakash/Installables/FacebookLoginSample-master-master/app/build/intermediates/pre-dexed/debug/bolts-android-1.1.4-78c0dd6d094fe25cf465ec3f63476789c87bb054.jar" />
+    </item>
+    <item
+        jar="/root/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/22.0.0/support-annotations-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="685d0b2c590447e85284ed84712cb363ba04eff8">
+        <dex dex="/home/aakash/Installables/FacebookLoginSample-master-master/app/build/intermediates/pre-dexed/debug/support-annotations-22.0.0-5c3eb70b57859c75c7a27e70cee70709b060b059.jar" />
+    </item>
+    <item
+        jar="/home/aakash/Installables/FacebookLoginSample-master-master/app/build/intermediates/exploded-aar/com.facebook.android/facebook-android-sdk/4.0.0/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="0f254ec13d6671680482d2218f01ecf14dfa93e6">
+        <dex dex="/home/aakash/Installables/FacebookLoginSample-master-master/app/build/intermediates/pre-dexed/debug/classes-ef3d7054a576dd710559421a1927214619065e05.jar" />
+    </item>
+    <item
+        jar="/home/aakash/Installables/FacebookLoginSample-master-master/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.0.0/libs/internal_impl-22.0.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="b5b92f469d515a13d778900f6d50c03d12f35504">
+        <dex dex="/home/aakash/Installables/FacebookLoginSample-master-master/app/build/intermediates/pre-dexed/debug/internal_impl-22.0.0-d3153403a70e45066bf6311755b9420391f39a9d.jar" />
+    </item>
+
+</items>
