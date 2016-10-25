@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/home/aakash/Downloads/test2/android/build/intermediates/res/merged/debug/layout-v11/device_list.xml",
+        "source": "/home/aakash/Downloads/test2/android/res/layout-v11/device_list.xml"
+    },
+    {
+        "merged": "/home/aakash/Downloads/test2/android/build/intermediates/res/merged/debug/layout-v11/abc_screen_content_include.xml",
+        "source": "/home/aakash/Downloads/test2/android/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.0.0/res/layout-v11/abc_screen_content_include.xml"
+    }
+]

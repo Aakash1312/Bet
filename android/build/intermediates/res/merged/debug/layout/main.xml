@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:id="@+id/linearLayout1"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <fragment
+            class="com.mygdx.game.DeviceListFragment"
+            android:id="@+id/frag_list"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/phone_list_height">
+            <!-- Preview: layout=@layout/row_devices -->
+        </fragment>
+        <fragment
+            class="com.mygdx.game.DeviceDetailFragment"
+            android:id="@+id/frag_detail"
+            android:layout_width="match_parent"
+            android:layout_height="259dp">
+            <!-- Preview: layout=@layout/device_detail -->
+        </fragment>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="enable"
+            android:id="@+id/enable" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="discover"
+            android:id="@+id/discover"
+            android:layout_gravity="right" />
+    </LinearLayout>
+</LinearLayout>
