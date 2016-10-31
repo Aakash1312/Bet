@@ -19,8 +19,8 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 		private SpriteBatch batch;
         private int w;
 		private int h;
-        private float currentx;
-        private float currenty;
+        private int currentx;
+        private int currenty;
         private int perx;
         private int pery;
         private TextureRegion backTile;
@@ -35,7 +35,7 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
         private float y;
         private int draggged = 0;
         private boolean moved = false;
-        private int de = 0;
+        private int isWhite = 0;
         class TouchInfo {
                 public float touchX = 0;
                 public float touchY = 0;
@@ -162,13 +162,13 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
             //Container
             container.setPosition(w-container.getWidth(),h/2-container.getHeight()/2);
             container.draw(batch);
-            containerb.setPosition(containerb.getWidth()/2,h/2-containerb.getHeight()/2);
+            containerb.setPosition(0,h/2-containerb.getHeight()/2);
             containerb.draw(batch);            //Board tiles
             for(int i =0 ;i<10;i++){
-                for (int j=0 ;j<10;j++)
+                for (int j=0 ;j<9;j++)
                 {
-                    float a = w/5+i*backTile.getRegionWidth();
-                    float b = j*backTile.getRegionHeight();
+                    float a = w/5+i*backTile.getRegionWidth()+backTile.getRegionWidth()/2;
+                    float b = j*backTile.getRegionHeight()+backTile.getRegionHeight()/2;
 					if((i+j)%2==0) {
 						batch.draw(backTile, a, b);
 					}
@@ -178,14 +178,7 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
             }
             if (validate==1)
             {
-//                piece a = new piece((int)(10 * (x - w/5) / h),(int)(10 * (y) / h),sprite);
-                board.add((int)(10 * (x - w/5) / h),(int)(10 * (y) / h), 1);
-                de++;
-                if(de%4==0)
-                {
-                    board.remove(0,5);
-                }
-//                piecePositions[a.x][a.y] = 1;
+                board.add((int)(10 * (x - w/5) / h),(int)(10 * (y) / h), isWhite);
                 validate =0;
             }
 			for(int i = 0; i < 1; i++){
@@ -197,28 +190,37 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
 
             shader.begin();
             //Code to handle new sprite creation
-            if (x > (w-container.getWidth()) && x<w && (y>(h/2-container.getHeight()/2))&&(y<(h/2+container.getHeight()/2))){
-                created = 1;
-            }
-            if(created==1 )
+            if (x > (w-container.getWidth()) && x<w && (y>(h/2-container.getHeight()/2))&&(y<(h/2+container.getHeight()/2)))
             {
-//                sprite.setPosition(x - sprite.getWidth() / 2, h - y - sprite.getHeight() / 2);
-//                sprite.draw(batch);
+                created = 1;
+                isWhite = 1;
+            }
+            if(created == 0)
+            {
+                if (x < (containerb.getWidth()) && x>0 && (y>(h/2-containerb.getHeight()/2))&&(y<(h/2+containerb.getHeight()/2)))
+                {
+                    created = 1;
+                    isWhite = 0;
+                }
             }
             if(draggged == 1) {
                 if ((int) (10 * (x - w / 5) / h)<10&&(int) (10 * (y) / h)<10&&(int) (10 * (y) / h)>-1&&(int) (10 * (x - w / 5) / h)>-1) {
                     if (board.positionMap[(int) (10 * (x - w / 5) / h)][(int) (10 * (y) / h)] != 1000 || moved) {
+                        System.out.println("touched");
                         if (!moved) {
-                            currentx = x;
-                            currenty = y;
                             perx = (int) (10 * (x - w / 5) / h);
                             pery = (int) (10 * (y) / h);
+                            currentx  = perx;
+                            currenty = pery;
                         }
+                        System.out.println(perx + " " + pery);
                         moved = true;
-                        if (x < (currentx + board.pieces.get(board.positionMap[perx][pery]).sprite.getWidth() / 2) && x > (currentx - board.pieces.get(board.positionMap[perx][pery]).sprite.getWidth() / 2) && y < (currenty + board.pieces.get(board.positionMap[perx][pery]).sprite.getHeight() / 2) && y > (currenty - board.pieces.get(board.positionMap[perx][pery]).sprite.getHeight() / 2)) {
-                            board.pieces.get(board.positionMap[perx][pery]).sprite.setPosition(x - board.pieces.get(board.positionMap[perx][pery]).sprite.getWidth() / 2, h - y - board.pieces.get(board.positionMap[perx][pery]).sprite.getHeight() / 2);
-                            currentx = x;
-                            currenty = y;
+                        if (board.pieces.get(board.positionMap[perx][pery]).touched(x,y)) {
+                            currentx = (int) (10 * (x - w / 5) / h);
+                            currenty = (int) (10 * (y) / h);
+                            board.move(perx, pery, currentx, currenty);
+                            perx = currentx;
+                            pery = currenty;
                             shader.setUniformf("u_sprite", w / 5 + ((int) (10 * (x - w / 5) / h)) * h / 10 + h / 20, h - h / 20 - ((int) (10 * y / h)) * h / 10);
                             shader.setUniformi("apply", 1);
                         } else {
@@ -226,43 +228,16 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
                         }
                     }
                 }
-//                if (x < (currentx + sprite.getWidth() / 2) && x > (currentx - sprite.getWidth() / 2) && y < (currenty + sprite.getHeight() / 2) && y > (currenty - sprite.getHeight() / 2)) {
-//                    sprite.setPosition(x - sprite.getWidth() / 2, h - y - sprite.getHeight() / 2);
-//                    currentx = x;
-//                    currenty = y;
-//                    shader.setUniformf("u_sprite", w / 5 + ((int) (10 * (x - w / 5) / h)) * h / 10 + h / 20, h - h / 20 - ((int) (10 * y / h)) * h / 10);
-//                    shader.setUniformi("apply", 1);
-//                } else {
-//                    shader.setUniformi("apply", 0);
-//                }
-
-//                if (x < (currentx*h/10+w/5 + sprite.getWidth() / 2) && x > (currentx*h/10+w/5 - sprite.getWidth() / 2) && y < (currenty*h/10 + sprite.getHeight() / 2) && y > (currenty*h/10 - sprite.getHeight() / 2)) {
-//                    sprite.setPosition(x - sprite.getWidth() / 2, h - y - sprite.getHeight() / 2);
-//                    currentx = x;
-//                    currenty = y;
-//                    shader.setUniformf("u_sprite", w / 5 + ((int) (10 * (x - w / 5) / h)) * h / 10 + h / 20, h - h / 20 - ((int) (10 * y / h)) * h / 10);
-//                    shader.setUniformi("apply", 1);
-//                } else {
-//                    shader.setUniformi("apply", 0);
-//                }
             }
             else
             {
                 shader.setUniformi("apply", 0);
-                if ((int)(10 * (x - w/5) / h)>-1&&(int)(10 * (x - w/5) / h)<10&&(int)(10 * (y) / h)>-1&&(int)(10 * (y) / h)<10) {
-                    if (board.positionMap[(int) (10 * (x - w / 5) / h)][(int) (10 * (y) / h)] == 1) {
-                        currentx = perx = (int) (10 * (x - w / 5) / h);
-                        currenty = pery = (int) (10 * (y) / h);
-                    }
-                }
             }
-//            sprite.draw(batch);
             for(int i =0 ; i < board.pieces.size();i++)
             {
                 board.pieces.get(i).sprite.setPosition((board.pieces.get(i).x)*h/10+w/5,h-((board.pieces.get(i).y +1)*h/10));
                 board.pieces.get(i).sprite.draw(batch);
             }
-//            shader.setUniformi("apply",0);
 			batch.end();
             shader.end();
 		}
@@ -320,7 +295,6 @@ public class MyGdxGame extends ApplicationAdapter implements InputProcessor {
                 if (moved)
                 {
                     moved = false;
-                    board.move(perx,pery,(int) (10 * (currentx - w / 5) / h),(int) (10 * (currenty) / h));
                 }
 			}
 			return true;
